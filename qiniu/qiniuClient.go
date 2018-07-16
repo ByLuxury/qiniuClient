@@ -9,8 +9,8 @@ import (
 	"context"
 )
 
-// UploadQiniu Upload file to Qiniu...
-func UploadQiniu(localFile, bucket, key string) (storage.PutRet, error) {
+// UploadFileToQiniu Upload file to Qiniu...
+func UploadFileToQiniu(localFile, bucket, key string) (storage.PutRet, error) {
 	accessKey := constant.AccessKey
 	secretKey := constant.SecretKey
 	putPolicy := storage.PutPolicy{
@@ -60,8 +60,8 @@ func GetQiniuFileList(bucket string) ([]storage.ListItem, error) {
 	return f, nil
 }
 
-// DeleteOneFileList Delete file from Qiniu...
-func DeleteOneFileList(bucket, key string) error {
+// DeleteOneFileFromQiniu Delete file from Qiniu...
+func DeleteOneFileFromQiniu(bucket, key string) error {
 	qb := &qbox.Mac{
 		AccessKey: constant.AccessKey,
 		SecretKey: []byte(constant.SecretKey),
