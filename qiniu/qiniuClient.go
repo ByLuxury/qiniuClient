@@ -3,16 +3,13 @@ package qiniu
 import (
 	"github.com/qiniu/api.v7/storage"
 	"github.com/qiniu/api.v7/auth/qbox"
-	"gitlab.com/qiniuyun/constant"
 	"fmt"
 	"log"
 	"context"
 )
 
 // UploadFileToQiniu Upload file to Qiniu...
-func UploadFileToQiniu(localFile, bucket, key string) (storage.PutRet, error) {
-	accessKey := constant.AccessKey
-	secretKey := constant.SecretKey
+func UploadFileToQiniu(localFile, bucket, key,accessKey, secretKey string) (storage.PutRet, error) {
 	putPolicy := storage.PutPolicy{
 		Scope: bucket,
 	}
@@ -42,10 +39,10 @@ func UploadFileToQiniu(localFile, bucket, key string) (storage.PutRet, error) {
 }
 
 // GetQiniuFileList Get file from Qiniu...
-func GetQiniuFileList(bucket string) ([]storage.ListItem, error) {
+func GetQiniuFileList(bucket,accessKey, secretKey string) ([]storage.ListItem, error) {
 	qb := &qbox.Mac{
-		AccessKey: constant.AccessKey,
-		SecretKey: []byte(constant.SecretKey),
+		AccessKey: accessKey,
+		SecretKey: []byte(secretKey),
 	}
 	cfg := storage.Config{}
 	cfg.Zone = &storage.ZoneHuadong
@@ -61,10 +58,10 @@ func GetQiniuFileList(bucket string) ([]storage.ListItem, error) {
 }
 
 // DeleteOneFileFromQiniu Delete file from Qiniu...
-func DeleteOneFileFromQiniu(bucket, key string) error {
+func DeleteOneFileFromQiniu(bucket, key,accessKey, secretKey string) error {
 	qb := &qbox.Mac{
-		AccessKey: constant.AccessKey,
-		SecretKey: []byte(constant.SecretKey),
+		AccessKey: accessKey,
+		SecretKey: []byte(secretKey),
 	}
 	cfg := storage.Config{}
 	cfg.Zone = &storage.ZoneHuadong
